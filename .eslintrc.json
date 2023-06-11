@@ -15,7 +15,10 @@
     "rules": {
       "quotes": ["error", "single"],
       "react/no-unescaped-entities": 0,
-      "react/react-in-jsx-scope": "off"
+      "react/react-in-jsx-scope": "off",
+      "prefer-template": "error",
+      "prefer-const": "error",
+      "no-empty-function": 0
     },
     "settings": {
       "react": {
