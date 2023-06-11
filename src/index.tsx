@@ -5,7 +5,7 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 
 // Providers
-import AnimeCollectionProvider from './views/providers/AnimeCollectionProvider'
+import AnimeCollectionProvider from './views/providers/AnimeCollectionsProvider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
