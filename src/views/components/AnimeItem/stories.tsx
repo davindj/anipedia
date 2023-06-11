@@ -9,17 +9,21 @@ const meta = {
   decorators: [
     story => (
       <div style={{ maxWidth: '300px', overflow: 'hidden' }}>{story()}</div>
-    )
+    ),
   ],
   tags: ['autodocs'],
   argTypes: {
     isSelectable: {
-      defaultValue: 'something false'
+      table: {
+        defaultValue: { summary: 'false' },
+      },
     },
     isSelected: {
-      defaultValue: 'false'
-    }
-  }
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+  },
 } satisfies Meta<typeof AnimeItem>
 
 export default meta
@@ -29,14 +33,14 @@ type Story = StoryObj<typeof meta>
 export const Normal: Story = {
   args: {
     title: 'One Piece',
-    image: '/anime-cover/anime-cover-1.jpeg'
-  }
+    image: '/anime-cover/anime-cover-1.jpeg',
+  },
 }
 
 export const NoImage: Story = {
   args: {
-    title: 'One Piece'
-  }
+    title: 'One Piece',
+  },
 }
 
 export const Selectable: Story = {
@@ -45,13 +49,23 @@ export const Selectable: Story = {
     image: '/anime-cover/anime-cover-1.jpeg',
     isSelectable: true,
     isSelected: false,
-    onSelect: () => alert('item selected')
-  }
+    onSelect: () => alert('item selected'),
+  },
 }
 
 export const Selected: Story = {
   args: {
     title: 'One Piece',
-    image: '/anime-cover/anime-cover-1.jpeg'
-  }
+    image: '/anime-cover/anime-cover-1.jpeg',
+    isSelectable: true,
+    isSelected: true,
+  },
+}
+
+export const Clickable: Story = {
+  args: {
+    title: 'One Piece',
+    image: '/anime-cover/anime-cover-1.jpeg',
+    onClick: () => alert('item clicked'),
+  },
 }

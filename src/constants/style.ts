@@ -1,0 +1,22 @@
+// MEDIA SIZE
+const MEDIA_WIDTH_SM = '576px'
+const MEDIA_WIDTH_MD = '768px'
+const MEDIA_WIDTH_LG = '992px'
+const MEDIA_WIDTH_XL = '1200px'
+
+// COLOR
+const COLOR_PRIMARY = '#21F662' // Light Green
+const COLOR_SECONDARY = '#000'
+const COLOR_BACKGROUND = '#F0FFF0' // Ultra Light Green
+const COLOR_DANGER = '#FF5050' // Light Red
+
+export {
+  MEDIA_WIDTH_SM,
+  MEDIA_WIDTH_MD,
+  MEDIA_WIDTH_LG,
+  MEDIA_WIDTH_XL,
+  COLOR_PRIMARY,
+  COLOR_SECONDARY,
+  COLOR_BACKGROUND,
+  COLOR_DANGER,
+}
