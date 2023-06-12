@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { mockAnimeDefault, mockAnimeWithNoCover } from './mock'
 import { AnimeItem } from '.'
 
-// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Components/AnimeItem',
   component: AnimeItem,
@@ -13,11 +13,6 @@ const meta = {
   ],
   tags: ['autodocs'],
   argTypes: {
-    isSelectable: {
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
     isSelected: {
       table: {
         defaultValue: { summary: 'false' },
@@ -29,43 +24,46 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Normal: Story = {
   args: {
-    title: 'One Piece',
-    image: '/anime-cover/anime-cover-1.jpeg',
+    anime: mockAnimeDefault,
   },
 }
 
 export const NoImage: Story = {
   args: {
-    title: 'One Piece',
+    anime: mockAnimeWithNoCover,
   },
 }
 
 export const Selectable: Story = {
   args: {
-    title: 'One Piece',
-    image: '/anime-cover/anime-cover-1.jpeg',
-    isSelectable: true,
+    anime: mockAnimeDefault,
     isSelected: false,
-    onSelect: () => alert('item selected'),
+    isSelectable: true,
+    onSelect: () => alert('handle select'),
   },
 }
 
 export const Selected: Story = {
   args: {
-    title: 'One Piece',
-    image: '/anime-cover/anime-cover-1.jpeg',
-    isSelectable: true,
+    anime: mockAnimeDefault,
     isSelected: true,
+    isSelectable: true,
+  },
+}
+
+export const Removable: Story = {
+  args: {
+    anime: mockAnimeDefault,
+    isRemovable: true,
+    onRemove: () => alert('handle remove'),
   },
 }
 
 export const Clickable: Story = {
   args: {
-    title: 'One Piece',
-    image: '/anime-cover/anime-cover-1.jpeg',
-    onClick: () => alert('item clicked'),
+    anime: mockAnimeDefault,
+    onClick: () => alert('handle click'),
   },
 }

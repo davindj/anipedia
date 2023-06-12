@@ -1,3 +1,4 @@
+import { Anime } from '../../../entities/anime'
 import {
   AnimeItemCheckbox,
   AnimeItemImageWrapper,
@@ -5,23 +6,19 @@ import {
   AnimeItemWrapper,
 } from './style'
 
-interface AnimeItemProps {
+type AnimeItemProps = {
   /**
-   * Anime Title
+   * Anime Data to be Rendered
    */
-  title: string
-  /**
-   * [Optional] Image source for Anime Cover Image
-   */
-  image?: string
-  /**
-   * [Optional] Redirect target on Item Click in Cover Image / Title
-   */
-  target?: string
+  anime: Anime
   /**
    * [Optional] Is Item Selectable
    */
   isSelectable?: boolean
+  /**
+   * [Optional] Is Item Removable
+   */
+  isRemovable?: boolean
   /**
    * [Optional] Is Item Selected
    */
@@ -29,7 +26,11 @@ interface AnimeItemProps {
   /**
    * [Optional] Handler on Item Selected
    */
-  onSelect?: (newVal: boolean) => void
+  onSelect?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  /**
+   * [Optional] Handler on Item Removed
+   */
+  onRemove?: () => void
   /**
    * [Optional] Handler on Item Clicked
    */
@@ -40,29 +41,31 @@ interface AnimeItemProps {
  * UI Component usually used in Collection
  */
 export const AnimeItem = ({
-  title,
-  image = '',
-  isSelectable = false,
+  anime: { title, cover },
   isSelected = false,
-  target = '',
-  onSelect,
+  isRemovable = false,
+  isSelectable = false,
+  onSelect = () => {},
+  onRemove = () => {},
   ...props
 }: AnimeItemProps) => {
-  const isOnSelectExist = onSelect != null
-  const altImage = `${image} cover image`
+  const altImage = `${cover} cover image`
   return (
     <AnimeItemWrapper {...props}>
       {isSelectable && (
         <AnimeItemCheckbox
           type="checkbox"
           checked={isSelected}
-          onChange={e => isOnSelectExist && onSelect(e.target.checked)}
+          onChange={onSelect}
         />
       )}
       <AnimeItemImageWrapper>
-        <img src={image} alt={altImage} />
+        <img src={cover} alt={altImage} />
       </AnimeItemImageWrapper>
-      <AnimeItemTitle href={target}>{title}</AnimeItemTitle>
+      <AnimeItemTitle>{title}</AnimeItemTitle>
+      {isRemovable && <button onClick={onRemove}>Remove Item</button>}
     </AnimeItemWrapper>
   )
 }
+
+export type { AnimeItemProps }
