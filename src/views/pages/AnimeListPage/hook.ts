@@ -91,11 +91,28 @@ const useAnimeListPageHook = () => {
   })
 
   const handleScroll = () => {
+    preventScrollToBottom()
     if (isLoading) return
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement
     const isValidHeight = scrollTop + clientHeight >= scrollHeight - 100
     if (!isValidHeight) return
     fetchMoreDataWithThrottle()
+  }
+
+  function preventScrollToBottom() {
+    const scrollThreshold = 20
+
+    const scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop
+    const scrollHeight =
+      document.documentElement.scrollHeight || document.body.scrollHeight
+    const clientHeight =
+      document.documentElement.clientHeight || document.body.clientHeight
+
+    if (scrollTop + clientHeight >= scrollHeight - scrollThreshold) {
+      // Scroll to a slightly higher position to prevent reaching the bottom
+      window.scrollTo(0, scrollHeight - clientHeight - scrollThreshold)
+    }
   }
 
   useEffect(() => {

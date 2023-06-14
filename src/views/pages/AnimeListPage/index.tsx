@@ -8,6 +8,7 @@ const AnimeListPage = () => {
     isToastOpen,
     animes,
     selectedIdxs,
+    skeletonCount,
     onSelect,
     onAddToCollection,
     onClearSelection,
@@ -19,7 +20,7 @@ const AnimeListPage = () => {
         isItemSelectable
         animes={animes}
         selectedIndexs={selectedIdxs}
-        skeletonCount={10}
+        skeletonCount={skeletonCount}
         onSelectItem={onSelect}
       />
       <SelectedAnimeToast
