@@ -117,7 +117,7 @@ const animeCollectionRemoveCollectionResolver: Resolver<
 const animeCollectionLoadCollectionsResolver: Resolver<
   AnimeCollectionState,
   AnimeCollectionLoadCollectionsAction
-> = state => {
+> = () => {
   return loadAnimeCollections()
 }
 
