@@ -1,4 +1,5 @@
 import { Anime } from '../../../entities/anime'
+import { Button, ButtonColorEnum, ButtonTypeEnum } from '../Button'
 import {
   AnimeItemCheckbox,
   AnimeItemImageWrapper,
@@ -63,7 +64,14 @@ export const AnimeItem = ({
         <img src={cover} alt={altImage} />
       </AnimeItemImageWrapper>
       <AnimeItemTitle>{title}</AnimeItemTitle>
-      {isRemovable && <button onClick={onRemove}>Remove Item</button>}
+      {isRemovable && (
+        <Button
+          text={'Remove'}
+          color={ButtonColorEnum.DANGER}
+          type={ButtonTypeEnum.OUTLINE}
+          onClick={onRemove}
+        />
+      )}
     </AnimeItemWrapper>
   )
 }

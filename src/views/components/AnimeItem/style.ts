@@ -3,6 +3,9 @@ import { COLOR_SECONDARY } from '../../../constants/style'
 
 const AnimeItemWrapper = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
 `
 
 const AnimeItemImageWrapper = styled.a`
@@ -20,14 +23,16 @@ const AnimeItemImageWrapper = styled.a`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    background-color: red;
+    background-color: #ccc;
   }
 `
 
 const AnimeItemTitle = styled.h3`
+  flex: 1;
   text-decoration: none;
 
   font-size: 1em;
+  margin: 0px;
 
   &:visited,
   &:hover,
