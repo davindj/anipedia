@@ -1,6 +1,9 @@
+import { Anime } from './anime'
+
 interface AnimeCollection {
+  id: string
   name: string
-  animeIds: number[]
+  animes: Anime[]
 }
 
 export type { AnimeCollection }

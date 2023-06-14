@@ -13,16 +13,18 @@ import {
   AnimeCollectionLoadCollectionsAction,
   AnimeCollectionActionEnum,
 } from './action'
+import { createSlug } from '../../../utils/helpers'
 
 const ANIME_COLLECTIONS_KEY = 'anipedia-anime_collections'
 
 const animeCollectionAddAnimeToNewCollectionResolver: Resolver<
   AnimeCollectionState,
   AnimeCollectionAddAnimeToNewCollectionAction
-> = (state, { collectionName, animeId }) => {
+> = (state, { collectionName, anime }) => {
   const newCollection: AnimeCollection = {
+    id: createSlug(collectionName),
     name: collectionName,
-    animeIds: [animeId],
+    animes: [{ ...anime }],
   }
   return [...state, newCollection]
 }
@@ -30,17 +32,19 @@ const animeCollectionAddAnimeToNewCollectionResolver: Resolver<
 const animeCollectionAddAnimeToCollectionResolver: Resolver<
   AnimeCollectionState,
   AnimeCollectionAddAnimeToCollectionAction
-> = (state, { collectionName, animeId }) => {
+> = (state, { collectionName, anime }) => {
   const collectionIdx = state.findIndex(
     collection => collection.name === collectionName
   )
-  if (state[collectionIdx].animeIds.findIndex(id => id === animeId) !== -1) {
-    return state // doesnt update because animeId already added
+  if (
+    state[collectionIdx].animes.findIndex(({ id }) => id === anime.id) !== -1
+  ) {
+    return state // doesnt update because anime already added
   }
   const newCollections = [...state]
   newCollections[collectionIdx] = {
     ...state[collectionIdx],
-    animeIds: [...state[collectionIdx].animeIds, animeId],
+    animes: [...state[collectionIdx].animes, { ...anime }],
   }
   return newCollections
 }
@@ -48,20 +52,21 @@ const animeCollectionAddAnimeToCollectionResolver: Resolver<
 const animeCollectionAddAnimesToCollectionResolver: Resolver<
   AnimeCollectionState,
   AnimeCollectionAddAnimesToCollectionAction
-> = (state, { collectionName, animeIds }) => {
+> = (state, { collectionName, animes }) => {
   const collectionIdx = state.findIndex(
     collection => collection.name === collectionName
   )
-  const addedAnimeIds = animeIds.filter(
-    animeId => !state[collectionIdx].animeIds.includes(animeId)
+  const addedanimes = animes.filter(
+    ({ id }) =>
+      state[collectionIdx].animes.findIndex(anime => anime.id === id) === -1
   )
-  if (addedAnimeIds.length === 0) {
+  if (addedanimes.length === 0) {
     return state // doesnt update state because there's no anime to add
   }
   const newCollections = [...state]
   newCollections[collectionIdx] = {
     ...state[collectionIdx],
-    animeIds: [...state[collectionIdx].animeIds, ...addedAnimeIds],
+    animes: [...state[collectionIdx].animes, ...addedanimes],
   }
   return newCollections
 }
@@ -76,7 +81,7 @@ const animeCollectionRemoveAnimeFromCollectionResolver: Resolver<
   const newCollections = [...state]
   newCollections[collectionIdx] = {
     ...state[collectionIdx],
-    animeIds: state[collectionIdx].animeIds.filter(id => id !== animeId),
+    animes: state[collectionIdx].animes.filter(({ id }) => id !== animeId),
   }
   return newCollections
 }
@@ -86,8 +91,9 @@ const animeCollectionAddCollectionResolver: Resolver<
   AnimeCollectionAddCollectionAction
 > = (state, { collectionName }) => {
   const newCollection: AnimeCollection = {
+    id: createSlug(collectionName),
     name: collectionName,
-    animeIds: [],
+    animes: [],
   }
   return [...state, newCollection]
 }
@@ -102,6 +108,7 @@ const animeCollectionEditCollectionResolver: Resolver<
   const newCollections = [...state]
   newCollections[collectionIdx] = {
     ...state[collectionIdx],
+    id: createSlug(newCollectionName),
     name: newCollectionName,
   }
   return newCollections
