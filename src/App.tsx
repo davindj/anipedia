@@ -3,11 +3,16 @@ import router from './routes'
 
 // Providers
 import AnimeCollectionProvider from './views/providers/AnimeCollectionsProvider'
+import AppApolloProvider from './providers/AppApolloProvider'
+
+import './index.css'
 
 function App() {
   return (
     <AnimeCollectionProvider>
-      <RouterProvider router={router} />
+      <AppApolloProvider>
+        <RouterProvider router={router} />
+      </AppApolloProvider>
     </AnimeCollectionProvider>
   )
 }
