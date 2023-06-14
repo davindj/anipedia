@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { RemoveConfirmationModal } from '.'
 
 const meta = {
-  title: 'Components/RemoveConfirmationModal',
+  title: 'Components/Modals/RemoveConfirmationModal',
   component: RemoveConfirmationModal,
   decorators: [
     story => (

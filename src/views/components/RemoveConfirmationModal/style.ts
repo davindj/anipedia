@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 const RemoveConfirmationModalDarkBackground = styled.div`
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   background: #000c;
   position: fixed;
