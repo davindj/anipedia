@@ -15,6 +15,7 @@ const ButtonWrapper = styled.button<ButtonWrapperProps>`
   &:active {
     transform: scale(0.9);
   }
+  white-space: nowrap;
 
   ${props => props.sizeStyle}
   ${props => props.colorStyle}
