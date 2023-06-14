@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import ROUTE_PATH from '../../routes/path'
 import { getRouteWithParam } from '../../routes'
+import { MEDIA_WIDTH_XL } from '../../constants/style'
 
 type MainLayoutProps = {
   children: React.ReactNode
@@ -53,7 +54,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       >
         to Unknown Page
       </NavLink>
-      {children}
+      <div style={{ maxWidth: MEDIA_WIDTH_XL, margin: 'auto' }}>{children}</div>
     </div>
   )
 }
