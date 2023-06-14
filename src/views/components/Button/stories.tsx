@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button, ButtonColorEnum, ButtonSizeEnum, ButtonStyleEnum } from '.'
+import { Button, ButtonColorEnum, ButtonSizeEnum, ButtonTypeEnum } from '.'
 
 const meta = {
   title: 'Components/Button',
@@ -16,8 +16,8 @@ const meta = {
     color: {
       control: { type: 'select', options: ButtonColorEnum },
     },
-    style: {
-      control: { type: 'select', options: ButtonStyleEnum },
+    type: {
+      control: { type: 'select', options: ButtonTypeEnum },
     },
   },
 } satisfies Meta<typeof Button>
@@ -42,7 +42,7 @@ export const LargeSize: Story = {
 export const FillSuccess: Story = {
   args: {
     text: 'Button',
-    style: ButtonStyleEnum.FILL,
+    type: ButtonTypeEnum.FILL,
     color: ButtonColorEnum.SUCCESS,
   },
 }
@@ -50,7 +50,7 @@ export const FillSuccess: Story = {
 export const FillDanger: Story = {
   args: {
     text: 'Button',
-    style: ButtonStyleEnum.FILL,
+    type: ButtonTypeEnum.FILL,
     color: ButtonColorEnum.DANGER,
   },
 }
@@ -58,14 +58,14 @@ export const FillDanger: Story = {
 export const FillSecondary: Story = {
   args: {
     text: 'Button',
-    style: ButtonStyleEnum.FILL,
+    type: ButtonTypeEnum.FILL,
     color: ButtonColorEnum.SECONDARY,
   },
 }
 export const OutlineSuccess: Story = {
   args: {
     text: 'Button',
-    style: ButtonStyleEnum.OUTLINE,
+    type: ButtonTypeEnum.OUTLINE,
     color: ButtonColorEnum.SUCCESS,
   },
 }
@@ -73,7 +73,7 @@ export const OutlineSuccess: Story = {
 export const OutlineDanger: Story = {
   args: {
     text: 'Button',
-    style: ButtonStyleEnum.OUTLINE,
+    type: ButtonTypeEnum.OUTLINE,
     color: ButtonColorEnum.DANGER,
   },
 }
@@ -81,7 +81,7 @@ export const OutlineDanger: Story = {
 export const OutlineSecondary: Story = {
   args: {
     text: 'Button',
-    style: ButtonStyleEnum.OUTLINE,
+    type: ButtonTypeEnum.OUTLINE,
     color: ButtonColorEnum.SECONDARY,
   },
 }
@@ -89,7 +89,7 @@ export const OutlineSecondary: Story = {
 export const TextSuccess: Story = {
   args: {
     text: 'Button',
-    style: ButtonStyleEnum.TEXT,
+    type: ButtonTypeEnum.TEXT,
     color: ButtonColorEnum.SUCCESS,
   },
 }
@@ -97,7 +97,7 @@ export const TextSuccess: Story = {
 export const TextDanger: Story = {
   args: {
     text: 'Button',
-    style: ButtonStyleEnum.TEXT,
+    type: ButtonTypeEnum.TEXT,
     color: ButtonColorEnum.DANGER,
   },
 }
@@ -105,7 +105,7 @@ export const TextDanger: Story = {
 export const TextSecondary: Story = {
   args: {
     text: 'Button',
-    style: ButtonStyleEnum.TEXT,
+    type: ButtonTypeEnum.TEXT,
     color: ButtonColorEnum.SECONDARY,
   },
 }

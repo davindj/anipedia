@@ -25,7 +25,7 @@ enum ButtonColorEnum {
   SECONDARY = 'secondary',
 }
 
-enum ButtonStyleEnum {
+enum ButtonTypeEnum {
   FILL = 'fill',
   OUTLINE = 'outline',
   TEXT = 'text',
@@ -45,9 +45,9 @@ type ButtonProps = {
    */
   color?: ButtonColorEnum
   /**
-   * [Optional] Button's style
+   * [Optional] Button's type
    */
-  style?: ButtonStyleEnum
+  type?: ButtonTypeEnum
   /**
    * [Optional] Handler on Button Clicked
    */
@@ -61,12 +61,12 @@ export const Button = ({
   text,
   size = ButtonSizeEnum.NORMAL,
   color = ButtonColorEnum.SECONDARY,
-  style = ButtonStyleEnum.FILL,
+  type = ButtonTypeEnum.FILL,
   onClick = () => {},
   ...props
 }: ButtonProps) => {
   const sizeStyle = getButtonSizeStyle(size)
-  const colorStyle = getButtonColorStyle(color, style)
+  const colorStyle = getButtonColorStyle(color, type)
   return (
     <ButtonWrapper
       sizeStyle={sizeStyle}
@@ -91,10 +91,10 @@ const getButtonSizeStyle = (size: ButtonSizeEnum): SerializedStyles => {
 }
 const getButtonColorStyle = (
   color: ButtonColorEnum,
-  style: ButtonStyleEnum
+  type: ButtonTypeEnum
 ): SerializedStyles => {
   const { mainColor, lightColor, darkColor } = getHexColor(color)
-  if (style === ButtonStyleEnum.FILL) {
+  if (type === ButtonTypeEnum.FILL) {
     const textHexColor =
       color === ButtonColorEnum.SUCCESS ? COLOR_TEXT_DARK : COLOR_TEXT_LIGHT
     return css`
@@ -119,7 +119,7 @@ const getButtonColorStyle = (
       background-color: ${lightColor};
     }
   `
-  if (style === ButtonStyleEnum.TEXT) {
+  if (type === ButtonTypeEnum.TEXT) {
     return textButtonStyle
   }
   return css`
@@ -149,4 +149,4 @@ const getHexColor = (color: ButtonColorEnum) => {
   }
 }
 
-export { ButtonSizeEnum, ButtonColorEnum, ButtonStyleEnum }
+export { ButtonSizeEnum, ButtonColorEnum, ButtonTypeEnum }
