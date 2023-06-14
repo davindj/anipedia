@@ -9,9 +9,9 @@ type AnimeListProps = {
    */
   animes: Anime[]
   /**
-   * [Optional] List of Selected Anime Id
+   * [Optional] List of Selected Anime Idx
    */
-  selectedIds?: number[]
+  selectedIndexs?: number[]
   /**
    * [Optional] Number of skeleton to be rendered, usually used in loading.
    */
@@ -27,11 +27,11 @@ type AnimeListProps = {
   /**
    * [Optional] Items to be rendered in List
    */
-  onSelectItem?: (anime: Anime) => void
+  onSelectItem?: (animeIdx: number) => void
   /**
    * [Optional] Items to be rendered in List
    */
-  onRemoveItem?: (anime: Anime) => void
+  onRemoveItem?: (animeIdx: number) => void
 }
 
 /**
@@ -39,7 +39,7 @@ type AnimeListProps = {
  */
 export const AnimeList = ({
   animes,
-  selectedIds = [],
+  selectedIndexs = [],
   skeletonCount = 0,
   isItemSelectable = false,
   isItemRemovable = false,
@@ -49,21 +49,21 @@ export const AnimeList = ({
 }: AnimeListProps) => {
   return (
     <AnimeListWrapper {...props}>
-      {animes.map(anime => (
+      {animes.map((anime, idx) => (
         <AnimeItem
           key={anime.id}
           anime={anime}
           isSelectable={isItemSelectable}
-          isSelected={selectedIds.includes(anime.id)}
+          isSelected={selectedIndexs.includes(idx)}
           isRemovable={isItemRemovable}
-          onSelect={() => onSelectItem(anime)}
-          onRemove={() => onRemoveItem(anime)}
+          onSelect={() => onSelectItem(idx)}
+          onRemove={() => onRemoveItem(idx)}
         />
       ))}
       {Array(skeletonCount)
         .fill(0)
         .map((_, i) => {
-          return <AnimeItemSkeleton key={i} />
+          return <AnimeItemSkeleton key={`skele-${i}`} />
         })}
     </AnimeListWrapper>
   )

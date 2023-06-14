@@ -6,7 +6,7 @@ const AnimeListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   column-gap: 10px;
-  row-gap: 10px;
+  row-gap: 40px;
 
   /* Medium Size */
   @media (min-width: ${MEDIA_WIDTH_MD}) {
@@ -15,7 +15,7 @@ const AnimeListWrapper = styled.div`
 
   /* Large Size */
   @media (min-width: ${MEDIA_WIDTH_LG}) {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   }
 `
 export { AnimeListWrapper }

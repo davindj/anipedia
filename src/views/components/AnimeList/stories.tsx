@@ -35,7 +35,7 @@ export const Removable: Story = {
   },
 }
 
-export const asd: Story = {
+export const SkeletonShowns: Story = {
   args: {
     animes: mockedAnimesDefault,
     skeletonCount: 10,
