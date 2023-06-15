@@ -1,0 +1,68 @@
+import { AnimeCollection } from '../../../entities/animeCollection'
+import { getRouteWithParam } from '../../../routes'
+import ROUTE_PATH from '../../../routes/path'
+import { Button, ButtonColorEnum, ButtonTypeEnum } from '../Button'
+import {
+  CollectionItemWrapper,
+  ItemImage,
+  ItemBody,
+  ItemBodyTextContainer,
+  ItemTitle,
+  ItemSubtitle,
+  ItemBodyActionContainer,
+} from './style'
+
+type CollectionItemProps = {
+  /**
+   * Anime Collection to be Rendered
+   */
+  collection: AnimeCollection
+  /**
+   * [Optional] Handler on Item Removed
+   */
+  onRemove?: () => void
+}
+
+/**
+ * Collection Item
+ */
+export const CollectionItem = ({
+  collection: { id, name, animes },
+  onRemove = () => {},
+}: CollectionItemProps) => {
+  const target = getRouteWithParam(ROUTE_PATH.ANIME_DETAIL_PAGE, id)
+  const coverImage =
+    animes.length > 0 ? animes[0].cover : '/img/collection-no-image.png'
+  const title = name
+  const subtitle =
+    animes.length > 1 ? `${animes.length} animes` : `${animes.length} anime`
+
+  // handler
+  const onClickRemove = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation() // Prevent event propagation to parent elements
+    e.preventDefault()
+    onRemove()
+  }
+
+  return (
+    <CollectionItemWrapper href={target}>
+      <ItemImage src={coverImage} />
+      <ItemBody>
+        <ItemBodyTextContainer>
+          <ItemTitle>{title}</ItemTitle>
+          <ItemSubtitle>{subtitle}</ItemSubtitle>
+        </ItemBodyTextContainer>
+        <ItemBodyActionContainer>
+          <Button
+            text={'Remove'}
+            color={ButtonColorEnum.DANGER}
+            type={ButtonTypeEnum.TEXT}
+            onClick={onClickRemove}
+          />
+        </ItemBodyActionContainer>
+      </ItemBody>
+    </CollectionItemWrapper>
+  )
+}
+
+export type { CollectionItemProps }

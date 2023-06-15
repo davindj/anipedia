@@ -51,7 +51,7 @@ type ButtonProps = {
   /**
    * [Optional] Handler on Button Clicked
    */
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void
 }
 
 /**
