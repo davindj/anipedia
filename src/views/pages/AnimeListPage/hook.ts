@@ -1,64 +1,15 @@
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { useContext, useEffect, useState } from 'react'
 import { Anime } from '../../../entities/anime'
 import AnimeCollectionContext from '../../../providers/AnimeCollectionsProvider/context'
-
-const GET_LOCATIONS = gql`
-  query AnimeList($page: Int, $perPage: Int) {
-    Page(page: $page, perPage: $perPage) {
-      pageInfo {
-        total
-        currentPage
-        lastPage
-        hasNextPage
-        perPage
-      }
-      media {
-        id
-        title {
-          romaji
-          english
-          native
-          userPreferred
-        }
-        coverImage {
-          extraLarge
-          large
-          medium
-          color
-        }
-        bannerImage
-      }
-    }
-  }
-`
+import { GET_ANIMES, GetAnimesPayload } from '../../../entities/payload'
 
 const useAnimeListPageHook = () => {
   const { openAddAnimesToCollectionModal } = useContext(AnimeCollectionContext)
   const [selectedIdxs, setSelectedIdxs] = useState<number[]>([])
-  const { data, fetchMore } = useQuery<{
-    Page: {
-      pageInfo: {
-        total: number
-        currentPage: number
-        lastPage: number
-        hasNextPage: boolean
-        perPage: number
-      }
-      media: {
-        id: number
-        title: {
-          romaji: string
-        }
-        coverImage: {
-          extraLarge: string
-          large: string
-          medium: string
-        }
-        bannerImage: string
-      }[]
-    }
-  }>(GET_LOCATIONS, { variables: { page: 1, perPage: 10 } })
+  const { data, fetchMore } = useQuery<GetAnimesPayload>(GET_ANIMES, {
+    variables: { page: 1, perPage: 10 },
+  })
   const [isLoading, setIsLoading] = useState(false)
 
   const throttle = (throttledFunction: () => void) => {
