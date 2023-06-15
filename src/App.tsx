@@ -2,7 +2,7 @@ import { RouterProvider } from 'react-router-dom'
 import router from './routes'
 
 // Providers
-import AnimeCollectionProvider from './views/providers/AnimeCollectionsProvider'
+import AnimeCollectionProvider from './providers/AnimeCollectionsProvider'
 import AppApolloProvider from './providers/AppApolloProvider'
 
 import './index.css'
