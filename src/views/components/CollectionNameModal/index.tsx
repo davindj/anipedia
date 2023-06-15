@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import {
   CollectionNameModalBody,
@@ -14,7 +15,6 @@ import {
   ButtonSizeEnum,
   ButtonTypeEnum,
 } from '../Button'
-import { useRef, useState } from 'react'
 
 type CollectionNameModalProps = {
   /**
@@ -55,26 +55,29 @@ export const CollectionNameModal = ({
   onCreate = () => {},
   onCancel: onCancelCallback = () => {},
 }: CollectionNameModalProps) => {
-  const [name, setName] = useState(initialCollectionName)
+  const [name, setName] = useState('')
   const refIsInputted = useRef(false)
+  useEffect(() => {
+    setName(initialCollectionName)
+  }, [initialCollectionName])
 
   if (!isOpen) return <></>
 
   // Variable
   const finalValue = name.trim()
+
+  const isEmpty = refIsInputted.current && finalValue === ''
+  const isAlphanumeric = /^[a-zA-Z0-9\s]*$/.test(finalValue)
   const isNameAlreadyUsed = usedNames.some(
     usedName => usedName.toLowerCase() === finalValue.toLowerCase()
   )
-  console.log(usedNames)
-  const isAlphanumeric = /^[a-zA-Z0-9\s]*$/.test(finalValue)
-  const isEmpty = refIsInputted.current && finalValue === ''
   let errMessage = ''
-  if (isNameAlreadyUsed) {
-    errMessage = 'collection name already been used'
+  if (isEmpty) {
+    errMessage = 'this field is required'
   } else if (!isAlphanumeric) {
     errMessage = 'only alphanumeric characters and space are allowed'
-  } else if (isEmpty) {
-    errMessage = 'this field is required'
+  } else if (isNameAlreadyUsed) {
+    errMessage = 'collection name already been used'
   }
   const isError = isNameAlreadyUsed || !isAlphanumeric || isEmpty
 
