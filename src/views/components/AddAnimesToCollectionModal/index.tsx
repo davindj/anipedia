@@ -14,12 +14,6 @@ import {
   ButtonCancel,
   ItemCardCreate,
 } from './style'
-import {
-  Button,
-  ButtonColorEnum,
-  ButtonSizeEnum,
-  ButtonTypeEnum,
-} from '../Button'
 import { AnimeCollection } from '../../../entities/animeCollection'
 
 type AddAnimesToCollectionModalProps = {
@@ -46,7 +40,7 @@ type AddAnimesToCollectionModalProps = {
 }
 
 /**
- * Modal to Handle Remove Confirmation
+ * Modal to Add Anime(s) to Collection
  */
 export const AddAnimesToCollectionModal = ({
   isOpen,
