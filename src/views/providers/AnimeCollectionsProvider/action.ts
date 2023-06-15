@@ -1,8 +1,6 @@
 import { Anime } from '../../../entities/anime'
 
 enum AnimeCollectionActionEnum {
-  ADD_ANIME_TO_NEW_COLLECTION,
-  ADD_ANIME_TO_COLLECTION,
   ADD_ANIMES_TO_COLLECTION,
   REMOVE_ANIME_FROM_COLLECTION,
   ADD_COLLECTION,
@@ -11,16 +9,6 @@ enum AnimeCollectionActionEnum {
   LOAD_COLLECTIONS,
 }
 
-type AnimeCollectionAddAnimeToNewCollectionAction = {
-  type: AnimeCollectionActionEnum.ADD_ANIME_TO_NEW_COLLECTION
-  collectionName: string
-  anime: Anime
-}
-type AnimeCollectionAddAnimeToCollectionAction = {
-  type: AnimeCollectionActionEnum.ADD_ANIME_TO_COLLECTION
-  collectionName: string
-  anime: Anime
-}
 type AnimeCollectionAddAnimesToCollectionAction = {
   type: AnimeCollectionActionEnum.ADD_ANIMES_TO_COLLECTION
   collectionName: string
@@ -34,6 +22,7 @@ type AnimeCollectionRemoveAnimeFromCollectionAction = {
 type AnimeCollectionAddCollectionAction = {
   type: AnimeCollectionActionEnum.ADD_COLLECTION
   collectionName: string
+  animes: Anime[]
 }
 type AnimeCollectionEditCollectionAction = {
   type: AnimeCollectionActionEnum.EDIT_COLLECTION
@@ -48,8 +37,6 @@ type AnimeCollectionLoadCollectionsAction = {
   type: AnimeCollectionActionEnum.LOAD_COLLECTIONS
 }
 type AnimeCollectionAction =
-  | AnimeCollectionAddAnimeToNewCollectionAction
-  | AnimeCollectionAddAnimeToCollectionAction
   | AnimeCollectionAddAnimesToCollectionAction
   | AnimeCollectionRemoveAnimeFromCollectionAction
   | AnimeCollectionAddCollectionAction
@@ -58,8 +45,6 @@ type AnimeCollectionAction =
   | AnimeCollectionLoadCollectionsAction
 
 export type {
-  AnimeCollectionAddAnimeToNewCollectionAction,
-  AnimeCollectionAddAnimeToCollectionAction,
   AnimeCollectionAddAnimesToCollectionAction,
   AnimeCollectionRemoveAnimeFromCollectionAction,
   AnimeCollectionAddCollectionAction,

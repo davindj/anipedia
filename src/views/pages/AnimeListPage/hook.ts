@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Anime } from '../../../entities/anime'
+import AnimeCollectionContext from '../../providers/AnimeCollectionsProvider/context'
 
 const GET_LOCATIONS = gql`
   query AnimeList($page: Int, $perPage: Int) {
@@ -33,6 +34,7 @@ const GET_LOCATIONS = gql`
 `
 
 const useAnimeListPageHook = () => {
+  const { openAddAnimesToCollectionModal } = useContext(AnimeCollectionContext)
   const [selectedIdxs, setSelectedIdxs] = useState<number[]>([])
   const { data, fetchMore } = useQuery<{
     Page: {
@@ -120,7 +122,7 @@ const useAnimeListPageHook = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [data])
+  }, [data, handleScroll])
 
   // Handler
   const onSelect = (selectedIdx: number) => {
@@ -131,8 +133,9 @@ const useAnimeListPageHook = () => {
     setSelectedIdxs([...selectedIdxs, selectedIdx])
   }
   const onAddToCollection = () => {
-    // TODO
-    alert('open modal to add selected animes to collection')
+    const selectedAnimes = animes.filter((_, idx) => selectedIdxs.includes(idx))
+    openAddAnimesToCollectionModal(selectedAnimes)
+    setSelectedIdxs([])
   }
   const onClearSelection = () => {
     setSelectedIdxs([])

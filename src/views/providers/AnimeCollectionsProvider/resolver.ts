@@ -4,8 +4,6 @@ import { AnimeCollectionState } from './state'
 import {
   AnimeCollectionAction,
   AnimeCollectionAddCollectionAction,
-  AnimeCollectionAddAnimeToNewCollectionAction,
-  AnimeCollectionAddAnimeToCollectionAction,
   AnimeCollectionAddAnimesToCollectionAction,
   AnimeCollectionRemoveAnimeFromCollectionAction,
   AnimeCollectionEditCollectionAction,
@@ -16,38 +14,6 @@ import {
 import { createSlug } from '../../../utils/helpers'
 
 const ANIME_COLLECTIONS_KEY = 'anipedia-anime_collections'
-
-const animeCollectionAddAnimeToNewCollectionResolver: Resolver<
-  AnimeCollectionState,
-  AnimeCollectionAddAnimeToNewCollectionAction
-> = (state, { collectionName, anime }) => {
-  const newCollection: AnimeCollection = {
-    id: createSlug(collectionName),
-    name: collectionName,
-    animes: [{ ...anime }],
-  }
-  return [...state, newCollection]
-}
-
-const animeCollectionAddAnimeToCollectionResolver: Resolver<
-  AnimeCollectionState,
-  AnimeCollectionAddAnimeToCollectionAction
-> = (state, { collectionName, anime }) => {
-  const collectionIdx = state.findIndex(
-    collection => collection.name === collectionName
-  )
-  if (
-    state[collectionIdx].animes.findIndex(({ id }) => id === anime.id) !== -1
-  ) {
-    return state // doesnt update because anime already added
-  }
-  const newCollections = [...state]
-  newCollections[collectionIdx] = {
-    ...state[collectionIdx],
-    animes: [...state[collectionIdx].animes, { ...anime }],
-  }
-  return newCollections
-}
 
 const animeCollectionAddAnimesToCollectionResolver: Resolver<
   AnimeCollectionState,
@@ -89,11 +55,11 @@ const animeCollectionRemoveAnimeFromCollectionResolver: Resolver<
 const animeCollectionAddCollectionResolver: Resolver<
   AnimeCollectionState,
   AnimeCollectionAddCollectionAction
-> = (state, { collectionName }) => {
+> = (state, { collectionName, animes }) => {
   const newCollection: AnimeCollection = {
     id: createSlug(collectionName),
     name: collectionName,
-    animes: [],
+    animes: animes.map(anime => ({ ...anime })),
   }
   return [...state, newCollection]
 }
@@ -144,11 +110,7 @@ const resolver = (
   action: AnimeCollectionAction
 ): AnimeCollectionState => {
   let newState = state
-  if (action.type === AnimeCollectionActionEnum.ADD_ANIME_TO_NEW_COLLECTION)
-    newState = animeCollectionAddAnimeToNewCollectionResolver(state, action)
-  else if (action.type === AnimeCollectionActionEnum.ADD_ANIME_TO_COLLECTION)
-    newState = animeCollectionAddAnimeToCollectionResolver(state, action)
-  else if (action.type === AnimeCollectionActionEnum.ADD_ANIMES_TO_COLLECTION)
+  if (action.type === AnimeCollectionActionEnum.ADD_ANIMES_TO_COLLECTION)
     newState = animeCollectionAddAnimesToCollectionResolver(state, action)
   else if (
     action.type === AnimeCollectionActionEnum.REMOVE_ANIME_FROM_COLLECTION

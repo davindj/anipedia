@@ -8,6 +8,8 @@ import { RemoveConfirmationModal } from '../../components/RemoveConfirmationModa
 import useRemoveAnimeFromCollectionModal from './hooks/useRemoveAnimeFromCollectionModal'
 import useAddAnimesToCollectionModal from './hooks/useAddAnimesToCollectionModal'
 import { AddAnimesToCollectionModal } from '../../components/AddAnimesToCollectionModal'
+import useAddCollectionModal from './hooks/useAddCollectionModal'
+import { CollectionNameModal } from '../../components/CollectionNameModal'
 
 const AnimeCollectionProvider: React.FC<ProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(resolver, [])
@@ -16,7 +18,8 @@ const AnimeCollectionProvider: React.FC<ProviderProps> = ({ children }) => {
   }, [])
 
   // Modal Collection
-  const openAddCollectionModal = () => {}
+  const { modalProps: addCollectionModalProps, openAddCollectionModal } =
+    useAddCollectionModal(dispatch, state)
   const openEditCollectionModal = () => {}
   const { modalProps: removeCollectionModalProps, openRemoveCollectionModal } =
     useRemoveCollectionModal(dispatch)
@@ -42,6 +45,7 @@ const AnimeCollectionProvider: React.FC<ProviderProps> = ({ children }) => {
 
   return (
     <AnimeCollectionContext.Provider value={context}>
+      <CollectionNameModal {...addCollectionModalProps} />
       <RemoveConfirmationModal {...removeCollectionModalProps} />
       <RemoveConfirmationModal {...removeAnimeFromCollectionModalProps} />
       <AddAnimesToCollectionModal {...addAnimesToCollectionModalProps} />
