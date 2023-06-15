@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { MEDIA_WIDTH_LG, MEDIA_WIDTH_MD } from '../../../constants/style'
+import { MEDIA_WIDTH_LG, MEDIA_WIDTH_MD } from '../../../utils/style'
 
 const CollectionListPageWrapper = styled.div`
   padding: 20px;

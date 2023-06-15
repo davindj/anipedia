@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { NavLink } from 'react-router-dom'
 import MainLayout from '../../layouts/MainLayout'
 import AnimeCollectionContext from '../../../providers/AnimeCollectionsProvider/context'
 import { ButtonSection, CollectionDetailPageWrapper, TitlePage } from './style'
@@ -11,7 +10,6 @@ import {
   ButtonTypeEnum,
 } from '../../components/Button'
 import { AnimeList } from '../../components/AnimeList'
-import ROUTE_PATH from '../../../routes/path'
 
 const CollectionDetailPage = () => {
   // hooks
@@ -44,9 +42,6 @@ const CollectionDetailPage = () => {
   return (
     <MainLayout>
       <CollectionDetailPageWrapper>
-        <NavLink to={ROUTE_PATH.COLLECTION_LIST_PAGE}>
-          Back to My Collections
-        </NavLink>
         <TitlePage>{collection.name}</TitlePage>
         <ButtonSection>
           <Button
