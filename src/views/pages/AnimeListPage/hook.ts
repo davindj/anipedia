@@ -23,34 +23,6 @@ const useAnimeListPageHook = () => {
       }, 2000)
     }
   }
-  const fetchMoreDataWithThrottle = throttle(() => {
-    console.log({ data })
-    if (!data) return
-    setIsLoading(true)
-    fetchMore({
-      variables: { page: data.Page.pageInfo.currentPage + 1 },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        setIsLoading(false)
-        if (!fetchMoreResult) return prev
-        return {
-          ...fetchMoreResult,
-          Page: {
-            ...fetchMoreResult.Page,
-            media: [...prev.Page.media, ...fetchMoreResult.Page.media],
-          },
-        }
-      },
-    })
-  })
-
-  const handleScroll = () => {
-    preventScrollToBottom()
-    if (isLoading) return
-    const { scrollTop, clientHeight, scrollHeight } = document.documentElement
-    const isValidHeight = scrollTop + clientHeight >= scrollHeight - 100
-    if (!isValidHeight) return
-    fetchMoreDataWithThrottle()
-  }
 
   function preventScrollToBottom() {
     const scrollThreshold = 20
@@ -69,11 +41,40 @@ const useAnimeListPageHook = () => {
   }
 
   useEffect(() => {
+    const handleScroll = () => {
+      preventScrollToBottom()
+      if (isLoading) return
+      const { scrollTop, clientHeight, scrollHeight } = document.documentElement
+      const isValidHeight = scrollTop + clientHeight >= scrollHeight - 100
+      if (!isValidHeight) return
+      fetchMoreDataWithThrottle()
+    }
+
+    const fetchMoreDataWithThrottle = throttle(() => {
+      console.log({ data })
+      if (!data) return
+      setIsLoading(true)
+      fetchMore({
+        variables: { page: data.Page.pageInfo.currentPage + 1 },
+        updateQuery: (prev, { fetchMoreResult }) => {
+          setIsLoading(false)
+          if (!fetchMoreResult) return prev
+          return {
+            ...fetchMoreResult,
+            Page: {
+              ...fetchMoreResult.Page,
+              media: [...prev.Page.media, ...fetchMoreResult.Page.media],
+            },
+          }
+        },
+      })
+    })
+
     window.addEventListener('scroll', handleScroll)
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [data, handleScroll])
+  }, [data, isLoading, fetchMore])
 
   // Handler
   const onSelect = (selectedIdx: number) => {
