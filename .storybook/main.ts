@@ -16,6 +16,7 @@ const config: StorybookConfig = {
       },
     },
     '@storybook/addon-a11y',
+    '@storybook/addon-jest',
   ],
   framework: {
     name: '@storybook/react-webpack5',
