@@ -18,6 +18,10 @@ type CollectionItemProps = {
    */
   collection: AnimeCollection
   /**
+   * [Optional] Handler on Item Edit
+   */
+  onEdit?: () => void
+  /**
    * [Optional] Handler on Item Removed
    */
   onRemove?: () => void
@@ -28,6 +32,7 @@ type CollectionItemProps = {
  */
 export const CollectionItem = ({
   collection: { id, name, animes },
+  onEdit = () => {},
   onRemove = () => {},
 }: CollectionItemProps) => {
   const target = getRouteWithParam(ROUTE_PATH.ANIME_DETAIL_PAGE, id)
@@ -38,6 +43,11 @@ export const CollectionItem = ({
     animes.length > 1 ? `${animes.length} animes` : `${animes.length} anime`
 
   // handler
+  const onClickEdit = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation() // Prevent event propagation to parent elements
+    e.preventDefault()
+    onEdit()
+  }
   const onClickRemove = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation() // Prevent event propagation to parent elements
     e.preventDefault()
@@ -53,6 +63,12 @@ export const CollectionItem = ({
           <ItemSubtitle>{subtitle}</ItemSubtitle>
         </ItemBodyTextContainer>
         <ItemBodyActionContainer>
+          <Button
+            text={'Edit'}
+            color={ButtonColorEnum.SUCCESS}
+            type={ButtonTypeEnum.TONE}
+            onClick={onClickEdit}
+          />
           <Button
             text={'Remove'}
             color={ButtonColorEnum.DANGER}
