@@ -62,6 +62,15 @@ export const FillSecondary: Story = {
     color: ButtonColorEnum.SECONDARY,
   },
 }
+
+export const FillInfo: Story = {
+  args: {
+    text: 'Button',
+    type: ButtonTypeEnum.FILL,
+    color: ButtonColorEnum.INFO,
+  },
+}
+
 export const OutlineSuccess: Story = {
   args: {
     text: 'Button',
@@ -86,6 +95,14 @@ export const OutlineSecondary: Story = {
   },
 }
 
+export const OutlineInfo: Story = {
+  args: {
+    text: 'Button',
+    type: ButtonTypeEnum.OUTLINE,
+    color: ButtonColorEnum.INFO,
+  },
+}
+
 export const TextSuccess: Story = {
   args: {
     text: 'Button',
@@ -107,5 +124,21 @@ export const TextSecondary: Story = {
     text: 'Button',
     type: ButtonTypeEnum.TEXT,
     color: ButtonColorEnum.SECONDARY,
+  },
+}
+
+export const TextInfo: Story = {
+  args: {
+    text: 'Button',
+    type: ButtonTypeEnum.TEXT,
+    color: ButtonColorEnum.INFO,
+  },
+}
+
+export const ToneInfo: Story = {
+  args: {
+    text: 'Button',
+    type: ButtonTypeEnum.TONE,
+    color: ButtonColorEnum.INFO,
   },
 }

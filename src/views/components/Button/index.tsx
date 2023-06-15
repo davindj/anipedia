@@ -4,6 +4,9 @@ import {
   COLOR_DANGER,
   COLOR_DANGER_DARK,
   COLOR_DANGER_LIGHT,
+  COLOR_INFO,
+  COLOR_INFO_DARK,
+  COLOR_INFO_LIGHT,
   COLOR_SECONDARY,
   COLOR_SECONDARY_DARK,
   COLOR_SECONDARY_LIGHT,
@@ -21,6 +24,7 @@ enum ButtonSizeEnum {
 
 enum ButtonColorEnum {
   SUCCESS = 'success',
+  INFO = 'info',
   DANGER = 'danger',
   SECONDARY = 'secondary',
 }
@@ -147,6 +151,13 @@ const getHexColor = (color: ButtonColorEnum) => {
       mainColor: COLOR_SUCCESS,
       lightColor: COLOR_SUCCESS_LIGHT,
       darkColor: COLOR_SUCCESS_DARK,
+    }
+  }
+  if (color === ButtonColorEnum.INFO) {
+    return {
+      mainColor: COLOR_INFO,
+      lightColor: COLOR_INFO_LIGHT,
+      darkColor: COLOR_INFO_DARK,
     }
   }
   return {
