@@ -56,12 +56,14 @@ export const AnimeItem = ({
   const targetPage = getRouteWithParam(ROUTE_PATH.ANIME_DETAIL_PAGE, `${id}`)
 
   // Handler
-  const onClickPreventNavigation =
-    (callback: (e: React.MouseEvent<HTMLElement>) => void = () => {}) =>
-    (e: React.MouseEvent<HTMLElement>) => {
-      e.stopPropagation() // Prevent event propagation to parent elements
-      callback(e)
-    }
+  const onClickCheckBox = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation() // Prevent event propagation to parent elements
+  }
+  const onClickRemoveButton = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation()
+    e.preventDefault()
+    onRemove()
+  }
 
   return (
     <AnimeItemWrapper {...props} to={targetPage}>
@@ -70,7 +72,7 @@ export const AnimeItem = ({
           type="checkbox"
           checked={isSelected}
           onChange={onSelect}
-          onClick={onClickPreventNavigation()}
+          onClick={onClickCheckBox}
         />
       )}
       <AnimeItemImageWrapper>
@@ -82,7 +84,7 @@ export const AnimeItem = ({
           text={'Remove'}
           color={ButtonColorEnum.DANGER}
           type={ButtonTypeEnum.OUTLINE}
-          onClick={onClickPreventNavigation(onRemove)}
+          onClick={onClickRemoveButton}
         />
       )}
     </AnimeItemWrapper>
