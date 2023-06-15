@@ -19,7 +19,7 @@ export const GET_ANIMES = gql`
           userPreferred
         }
         coverImage {
-          extraLargeL
+          extraLarge
           large
           medium
           color
@@ -56,5 +56,67 @@ export type GetAnimesPayload = {
       }
       bannerImage: string
     }[]
+  }
+}
+
+export const GET_ANIME_DETAIL = gql`
+  query AnimeDetail($id: Int) {
+    Media(id: $id) {
+      id
+      title {
+        romaji
+      }
+      coverImage {
+        extraLarge
+        medium
+      }
+      bannerImage
+      description(asHtml: false)
+      genres
+      meanScore
+      episodes
+      trailer {
+        id
+        site
+        thumbnail
+      }
+      studios(isMain: true) {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+`
+
+export type GetAnimeDetailVariable = {
+  id: number
+}
+
+export type GetAnimeDetailPayload = {
+  Media: {
+    id: number
+    title: {
+      romaji: string
+    }
+    coverImage: {
+      extraLarge: string
+      medium: string
+    }
+    bannerImage: string
+    description: string
+    genres: string[]
+    meanScore: number
+    episodes: number
+    trailer?: {
+      id: string
+      site: string
+      thumbnail: string
+    }
+    studios?: {
+      nodes?: {
+        name: string
+      }[]
+    }
   }
 }
