@@ -4,7 +4,7 @@ import {
   COLOR_SUCCESS_DARK,
   COLOR_SUCCESS_LIGHT,
   COLOR_TEXT_DARK,
-} from '../../../constants/style'
+} from '../../../utils/style'
 import { css } from '@emotion/react'
 
 const DarkBackground = styled.div`

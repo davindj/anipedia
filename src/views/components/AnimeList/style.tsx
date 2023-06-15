@@ -1,6 +1,6 @@
 // import { MEDIA_WIDTH_LG, MEDIA_WIDTH_MD } from '@constants/style'
 import styled from '@emotion/styled'
-import { MEDIA_WIDTH_LG, MEDIA_WIDTH_MD } from '../../../constants/style'
+import { MEDIA_WIDTH_LG, MEDIA_WIDTH_MD } from '../../../utils/style'
 
 const AnimeListWrapper = styled.div`
   display: grid;

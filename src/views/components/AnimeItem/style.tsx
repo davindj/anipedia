@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { COLOR_SECONDARY } from '../../../constants/style'
+import { COLOR_SECONDARY } from '../../../utils/style'
 
 const AnimeItemWrapper = styled.div`
   position: relative;

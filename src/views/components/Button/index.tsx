@@ -12,7 +12,7 @@ import {
   COLOR_SUCCESS_LIGHT,
   COLOR_TEXT_DARK,
   COLOR_TEXT_LIGHT,
-} from '../../../constants/style'
+} from '../../../utils/style'
 
 enum ButtonSizeEnum {
   NORMAL = 'normal',

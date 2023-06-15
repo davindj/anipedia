@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { COLOR_TEXT_DARK } from '../../../constants/style'
+import { COLOR_TEXT_DARK } from '../../../utils/style'
 
 const SelectedAnimeToastWrapper = styled.div`
   position: fixed;
