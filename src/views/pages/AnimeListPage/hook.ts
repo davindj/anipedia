@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
 import { useContext, useEffect, useState } from 'react'
 import { Anime } from '../../../entities/anime'
-import AnimeCollectionContext from '../../providers/AnimeCollectionsProvider/context'
+import AnimeCollectionContext from '../../../providers/AnimeCollectionsProvider/context'
 
 const GET_LOCATIONS = gql`
   query AnimeList($page: Int, $perPage: Int) {
