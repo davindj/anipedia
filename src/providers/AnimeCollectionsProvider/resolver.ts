@@ -1,3 +1,4 @@
+import { uuid } from 'uuidv4'
 import { Resolver } from '../../types/provider'
 import { AnimeCollection } from '../../entities/animeCollection'
 import { AnimeCollectionState } from './state'
@@ -11,7 +12,6 @@ import {
   AnimeCollectionLoadCollectionsAction,
   AnimeCollectionActionEnum,
 } from './action'
-import { createSlug } from '../../utils/helpers'
 
 const ANIME_COLLECTIONS_KEY = 'anipedia-anime_collections'
 
@@ -69,7 +69,7 @@ const animeCollectionAddCollectionResolver: Resolver<
 > = (state, { collectionName, animes }) => {
   const { animeCollections: collections } = state
   const newCollection: AnimeCollection = {
-    id: createSlug(collectionName),
+    id: uuid(),
     name: collectionName,
     animes: animes.map(anime => ({ ...anime })),
   }
@@ -90,7 +90,6 @@ const animeCollectionEditCollectionResolver: Resolver<
   const newCollections = [...collections]
   newCollections[collectionIdx] = {
     ...collections[collectionIdx],
-    id: createSlug(newCollectionName),
     name: newCollectionName,
   }
   return {
