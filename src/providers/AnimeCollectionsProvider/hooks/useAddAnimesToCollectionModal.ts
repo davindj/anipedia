@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { AnimeCollection } from '../../../../entities/animeCollection'
+import { AnimeCollection } from '../../../entities/animeCollection'
 import { AnimeCollectionAction, AnimeCollectionActionEnum } from '../action'
-import { Anime } from '../../../../entities/anime'
-import { AddAnimesToCollectionModalProps } from '../../../components/AddAnimesToCollectionModal'
+import { Anime } from '../../../entities/anime'
+import { AddAnimesToCollectionModalProps } from '../../../views/components/AddAnimesToCollectionModal'
 
 const defaultModalProps: AddAnimesToCollectionModalProps = {
   isOpen: false,

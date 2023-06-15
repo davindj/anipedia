@@ -1,15 +1,15 @@
 import { useEffect, useReducer } from 'react'
-import { ProviderProps } from '../../../types/provider'
+import { ProviderProps } from '../../types/provider'
 import resolver from './resolver'
 import AnimeCollectionContext, { AnimeCollectionContextType } from './context'
 import { AnimeCollectionActionEnum } from './action'
 import useRemoveCollectionModal from './hooks/useRemoveCollectionModal'
-import { RemoveConfirmationModal } from '../../components/RemoveConfirmationModal'
+import { RemoveConfirmationModal } from '../../views/components/RemoveConfirmationModal'
 import useRemoveAnimeFromCollectionModal from './hooks/useRemoveAnimeFromCollectionModal'
 import useAddAnimesToCollectionModal from './hooks/useAddAnimesToCollectionModal'
-import { AddAnimesToCollectionModal } from '../../components/AddAnimesToCollectionModal'
+import { AddAnimesToCollectionModal } from '../../views/components/AddAnimesToCollectionModal'
 import useAddCollectionModal from './hooks/useAddCollectionModal'
-import { CollectionNameModal } from '../../components/CollectionNameModal'
+import { CollectionNameModal } from '../../views/components/CollectionNameModal'
 
 const AnimeCollectionProvider: React.FC<ProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(resolver, [])

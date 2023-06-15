@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { AnimeCollection } from '../../../../entities/animeCollection'
-import { RemoveConfirmationModalProps } from '../../../components/RemoveConfirmationModal'
+import { AnimeCollection } from '../../../entities/animeCollection'
+import { RemoveConfirmationModalProps } from '../../../views/components/RemoveConfirmationModal'
 import { AnimeCollectionAction, AnimeCollectionActionEnum } from '../action'
-import { Anime } from '../../../../entities/anime'
+import { Anime } from '../../../entities/anime'
 
 const defaultModalProps: RemoveConfirmationModalProps = {
   isOpen: false,

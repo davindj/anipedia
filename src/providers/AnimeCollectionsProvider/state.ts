@@ -1,4 +1,4 @@
-import { AnimeCollection } from '../../../entities/animeCollection'
+import { AnimeCollection } from '../../entities/animeCollection'
 
 type AnimeCollectionState = AnimeCollection[]
 

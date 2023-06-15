@@ -1,6 +1,6 @@
 import { createContext } from 'react'
-import { Anime } from '../../../entities/anime'
-import { AnimeCollection } from '../../../entities/animeCollection'
+import { Anime } from '../../entities/anime'
+import { AnimeCollection } from '../../entities/animeCollection'
 
 type AnimeCollectionContextType = {
   animeCollections: AnimeCollection[]

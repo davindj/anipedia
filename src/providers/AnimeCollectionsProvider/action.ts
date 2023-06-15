@@ -1,4 +1,4 @@
-import { Anime } from '../../../entities/anime'
+import { Anime } from '../../entities/anime'
 
 enum AnimeCollectionActionEnum {
   ADD_ANIMES_TO_COLLECTION,

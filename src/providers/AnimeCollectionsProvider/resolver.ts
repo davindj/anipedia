@@ -1,5 +1,5 @@
-import { Resolver } from '../../../types/provider'
-import { AnimeCollection } from '../../../entities/animeCollection'
+import { Resolver } from '../../types/provider'
+import { AnimeCollection } from '../../entities/animeCollection'
 import { AnimeCollectionState } from './state'
 import {
   AnimeCollectionAction,
@@ -11,7 +11,7 @@ import {
   AnimeCollectionLoadCollectionsAction,
   AnimeCollectionActionEnum,
 } from './action'
-import { createSlug } from '../../../utils/helpers'
+import { createSlug } from '../../utils/helpers'
 
 const ANIME_COLLECTIONS_KEY = 'anipedia-anime_collections'
 
