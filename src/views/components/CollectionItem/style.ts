@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
+import { NavLink } from 'react-router-dom'
 
-const CollectionItemWrapper = styled.a`
+const CollectionItemWrapper = styled(NavLink)`
   display: block;
   background-color: white;
   box-shadow: 0px 4px 4px 0px #0003;

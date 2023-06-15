@@ -55,7 +55,7 @@ export const CollectionItem = ({
   }
 
   return (
-    <CollectionItemWrapper href={target}>
+    <CollectionItemWrapper to={target}>
       <ItemImage src={coverImage} />
       <ItemBody>
         <ItemBodyTextContainer>
