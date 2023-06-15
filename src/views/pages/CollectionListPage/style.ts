@@ -10,6 +10,7 @@ const TitlePage = styled.h1`
   font-size: 2em;
   margin: 0px;
   margin-bottom: 20px;
+  line-height: 1em;
 `
 
 const CollectionItemsWrapper = styled.div`

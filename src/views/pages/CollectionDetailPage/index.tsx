@@ -10,6 +10,7 @@ import {
   ButtonTypeEnum,
 } from '../../components/Button'
 import { AnimeList } from '../../components/AnimeList'
+import { Container } from '../../../utils/style'
 
 const CollectionDetailPage = () => {
   // hooks
@@ -41,23 +42,25 @@ const CollectionDetailPage = () => {
 
   return (
     <MainLayout>
-      <CollectionDetailPageWrapper>
-        <TitlePage>{collection.name}</TitlePage>
-        <ButtonSection>
-          <Button
-            text={'Edit'}
-            size={ButtonSizeEnum.NORMAL}
-            color={ButtonColorEnum.SUCCESS}
-            type={ButtonTypeEnum.FILL}
-            onClick={onEditCollectionName}
+      <Container>
+        <CollectionDetailPageWrapper>
+          <TitlePage>{collection.name}</TitlePage>
+          <ButtonSection>
+            <Button
+              text={'Edit'}
+              size={ButtonSizeEnum.NORMAL}
+              color={ButtonColorEnum.SUCCESS}
+              type={ButtonTypeEnum.FILL}
+              onClick={onEditCollectionName}
+            />
+          </ButtonSection>
+          <AnimeList
+            isItemRemovable
+            animes={collection.animes}
+            onRemoveItem={onRemoveItem}
           />
-        </ButtonSection>
-        <AnimeList
-          isItemRemovable
-          animes={collection.animes}
-          onRemoveItem={onRemoveItem}
-        />
-      </CollectionDetailPageWrapper>
+        </CollectionDetailPageWrapper>
+      </Container>
     </MainLayout>
   )
 }

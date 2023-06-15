@@ -14,6 +14,7 @@ import {
   ButtonSizeEnum,
   ButtonTypeEnum,
 } from '../../components/Button'
+import { Container } from '../../../utils/style'
 
 const CollectionListPage = () => {
   const {
@@ -36,26 +37,28 @@ const CollectionListPage = () => {
 
   return (
     <MainLayout>
-      <CollectionListPageWrapper>
-        <TitlePage>My Collections</TitlePage>
-        <Button
-          text={'Add a Collection'}
-          size={ButtonSizeEnum.NORMAL}
-          color={ButtonColorEnum.SUCCESS}
-          type={ButtonTypeEnum.FILL}
-          onClick={onAddButtonClicked}
-        />
-        <CollectionItemsWrapper>
-          {animeCollections.map(collection => (
-            <CollectionItem
-              key={collection.id}
-              collection={collection}
-              onEdit={onEditCollectionItem(collection)}
-              onRemove={onRemoveCollectionItem(collection)}
-            />
-          ))}
-        </CollectionItemsWrapper>
-      </CollectionListPageWrapper>
+      <Container>
+        <CollectionListPageWrapper>
+          <TitlePage>My Collections</TitlePage>
+          <Button
+            text={'Add a Collection'}
+            size={ButtonSizeEnum.NORMAL}
+            color={ButtonColorEnum.SUCCESS}
+            type={ButtonTypeEnum.FILL}
+            onClick={onAddButtonClicked}
+          />
+          <CollectionItemsWrapper>
+            {animeCollections.map(collection => (
+              <CollectionItem
+                key={collection.id}
+                collection={collection}
+                onEdit={onEditCollectionItem(collection)}
+                onRemove={onRemoveCollectionItem(collection)}
+              />
+            ))}
+          </CollectionItemsWrapper>
+        </CollectionListPageWrapper>
+      </Container>
     </MainLayout>
   )
 }
