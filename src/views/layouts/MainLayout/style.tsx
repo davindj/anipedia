@@ -9,6 +9,7 @@ export const PageWrapper = styled.div`
 export const PageMainSection = styled.main`
   height: 100%;
   overflow-y: scroll;
+  padding-bottom: 80px;
 `
 
 export const PageHeader = styled.header`
