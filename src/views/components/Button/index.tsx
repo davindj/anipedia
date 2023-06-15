@@ -27,6 +27,7 @@ enum ButtonColorEnum {
 
 enum ButtonTypeEnum {
   FILL = 'fill',
+  TONE = 'tone',
   OUTLINE = 'outline',
   TEXT = 'text',
 }
@@ -121,6 +122,12 @@ const getButtonColorStyle = (
   `
   if (type === ButtonTypeEnum.TEXT) {
     return textButtonStyle
+  }
+  if (type === ButtonTypeEnum.TONE) {
+    return css`
+      ${textButtonStyle}
+      background-color: ${lightColor};
+    `
   }
   return css`
     ${textButtonStyle}
