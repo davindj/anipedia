@@ -5,8 +5,7 @@ const SelectedAnimeToastWrapper = styled.div`
   position: fixed;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
+  z-index: 8000;
 
   background-color: white;
   padding: 20px;
@@ -17,6 +16,17 @@ const SelectedAnimeToastWrapper = styled.div`
   flex-direction: column;
   column-gap: 20px;
   row-gap: 20px;
+
+  animation: slide-in 0.3s;
+  transform: translateX(-50%);
+  @keyframes slide-in {
+    from {
+      transform: translateX(-50%) translateY(100%);
+    }
+    to {
+      transform: translateX(-50%) translateY(0%);
+    }
+  }
 `
 
 const SelectedAnimeToastTitle = styled.p`

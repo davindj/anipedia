@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { COLOR_BACKGROUND, COLOR_SUCCESS } from '../../../utils/style'
+import { COLOR_BACKGROUND } from '../../../utils/style'
 
 export const PageWrapper = styled.div`
   min-height: 100%;
