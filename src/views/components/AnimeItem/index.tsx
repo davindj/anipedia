@@ -1,4 +1,6 @@
 import { Anime } from '../../../entities/anime'
+import { getRouteWithParam } from '../../../routes'
+import ROUTE_PATH from '../../../routes/path'
 import { Button, ButtonColorEnum, ButtonTypeEnum } from '../Button'
 import {
   AnimeItemCheckbox,
@@ -42,7 +44,7 @@ type AnimeItemProps = {
  * UI Component usually used in Collection
  */
 export const AnimeItem = ({
-  anime: { title, cover },
+  anime: { id, title, cover },
   isSelected = false,
   isRemovable = false,
   isSelectable = false,
@@ -51,13 +53,24 @@ export const AnimeItem = ({
   ...props
 }: AnimeItemProps) => {
   const altImage = `${cover} cover image`
+  const targetPage = getRouteWithParam(ROUTE_PATH.ANIME_DETAIL_PAGE, `${id}`)
+
+  // Handler
+  const onClickPreventNavigation =
+    (callback: (e: React.MouseEvent<HTMLElement>) => void = () => {}) =>
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.stopPropagation() // Prevent event propagation to parent elements
+      callback(e)
+    }
+
   return (
-    <AnimeItemWrapper {...props}>
+    <AnimeItemWrapper {...props} to={targetPage}>
       {isSelectable && (
         <AnimeItemCheckbox
           type="checkbox"
           checked={isSelected}
           onChange={onSelect}
+          onClick={onClickPreventNavigation()}
         />
       )}
       <AnimeItemImageWrapper>
@@ -69,7 +82,7 @@ export const AnimeItem = ({
           text={'Remove'}
           color={ButtonColorEnum.DANGER}
           type={ButtonTypeEnum.OUTLINE}
-          onClick={onRemove}
+          onClick={onClickPreventNavigation(onRemove)}
         />
       )}
     </AnimeItemWrapper>
