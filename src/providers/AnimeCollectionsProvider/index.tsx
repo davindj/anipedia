@@ -10,16 +10,17 @@ import useAddAnimesToCollectionModal from './hooks/useAddAnimesToCollectionModal
 import { AddAnimesToCollectionModal } from '../../views/components/AddAnimesToCollectionModal'
 import useAddCollectionModal from './hooks/useAddCollectionModal'
 import { CollectionNameModal } from '../../views/components/CollectionNameModal'
+import initialState from './state'
 
 const AnimeCollectionProvider: React.FC<ProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer(resolver, [])
+  const [state, dispatch] = useReducer(resolver, initialState)
   useEffect(() => {
     dispatch({ type: AnimeCollectionActionEnum.LOAD_COLLECTIONS })
   }, [])
 
   // Modal Collection
   const { modalProps: addCollectionModalProps, openAddCollectionModal } =
-    useAddCollectionModal(dispatch, state)
+    useAddCollectionModal(dispatch, state.animeCollections)
   const openEditCollectionModal = () => {}
   const { modalProps: removeCollectionModalProps, openRemoveCollectionModal } =
     useRemoveCollectionModal(dispatch)
@@ -28,14 +29,18 @@ const AnimeCollectionProvider: React.FC<ProviderProps> = ({ children }) => {
   const {
     modalProps: addAnimesToCollectionModalProps,
     openAddAnimesToCollectionModal,
-  } = useAddAnimesToCollectionModal(dispatch, state, openAddCollectionModal)
+  } = useAddAnimesToCollectionModal(
+    dispatch,
+    state.animeCollections,
+    openAddCollectionModal
+  )
   const {
     modalProps: removeAnimeFromCollectionModalProps,
     openRemoveAnimeFromCollectionModal,
   } = useRemoveAnimeFromCollectionModal(dispatch)
 
   const context: AnimeCollectionContextType = {
-    animeCollections: state,
+    ...state,
     openAddAnimesToCollectionModal,
     openRemoveAnimeFromCollectionModal,
     openAddCollectionModal,

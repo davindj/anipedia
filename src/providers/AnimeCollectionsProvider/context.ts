@@ -1,9 +1,9 @@
 import { createContext } from 'react'
 import { Anime } from '../../entities/anime'
 import { AnimeCollection } from '../../entities/animeCollection'
+import { AnimeCollectionState } from './state'
 
-type AnimeCollectionContextType = {
-  animeCollections: AnimeCollection[]
+type AnimeCollectionContextType = AnimeCollectionState & {
   openAddAnimesToCollectionModal: (animes: Anime[]) => void
   openRemoveAnimeFromCollectionModal: (
     anime: Anime,
@@ -14,6 +14,7 @@ type AnimeCollectionContextType = {
   openRemoveCollectionModal: (collection: AnimeCollection) => void
 }
 const initialContextValue: AnimeCollectionContextType = {
+  isLoading: true,
   animeCollections: [],
   openAddAnimesToCollectionModal: () => {},
   openRemoveAnimeFromCollectionModal: () => {},

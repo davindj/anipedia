@@ -19,89 +19,118 @@ const animeCollectionAddAnimesToCollectionResolver: Resolver<
   AnimeCollectionState,
   AnimeCollectionAddAnimesToCollectionAction
 > = (state, { collectionName, animes }) => {
-  const collectionIdx = state.findIndex(
+  const { animeCollections: collections } = state
+  const collectionIdx = collections.findIndex(
     collection => collection.name === collectionName
   )
   const addedanimes = animes.filter(
     ({ id }) =>
-      state[collectionIdx].animes.findIndex(anime => anime.id === id) === -1
+      collections[collectionIdx].animes.findIndex(anime => anime.id === id) ===
+      -1
   )
   if (addedanimes.length === 0) {
     return state // doesnt update state because there's no anime to add
   }
-  const newCollections = [...state]
+  const newCollections = [...collections]
   newCollections[collectionIdx] = {
-    ...state[collectionIdx],
-    animes: [...state[collectionIdx].animes, ...addedanimes],
+    ...collections[collectionIdx],
+    animes: [...collections[collectionIdx].animes, ...addedanimes],
   }
-  return newCollections
+  return {
+    ...state,
+    animeCollections: newCollections,
+  }
 }
 
 const animeCollectionRemoveAnimeFromCollectionResolver: Resolver<
   AnimeCollectionState,
   AnimeCollectionRemoveAnimeFromCollectionAction
 > = (state, { collectionName, animeId }) => {
-  const collectionIdx = state.findIndex(
+  const { animeCollections: collections } = state
+  const collectionIdx = collections.findIndex(
     collection => collection.name === collectionName
   )
-  const newCollections = [...state]
+  const newCollections = [...collections]
   newCollections[collectionIdx] = {
-    ...state[collectionIdx],
-    animes: state[collectionIdx].animes.filter(({ id }) => id !== animeId),
+    ...collections[collectionIdx],
+    animes: collections[collectionIdx].animes.filter(
+      ({ id }) => id !== animeId
+    ),
   }
-  return newCollections
+  return {
+    ...state,
+    animeCollections: newCollections,
+  }
 }
 
 const animeCollectionAddCollectionResolver: Resolver<
   AnimeCollectionState,
   AnimeCollectionAddCollectionAction
 > = (state, { collectionName, animes }) => {
+  const { animeCollections: collections } = state
   const newCollection: AnimeCollection = {
     id: createSlug(collectionName),
     name: collectionName,
     animes: animes.map(anime => ({ ...anime })),
   }
-  return [...state, newCollection]
+  return {
+    ...state,
+    animeCollections: [...collections, newCollection],
+  }
 }
 
 const animeCollectionEditCollectionResolver: Resolver<
   AnimeCollectionState,
   AnimeCollectionEditCollectionAction
 > = (state, { oldCollectionName, newCollectionName }) => {
-  const collectionIdx = state.findIndex(
+  const { animeCollections: collections } = state
+  const collectionIdx = collections.findIndex(
     collection => collection.name === oldCollectionName
   )
-  const newCollections = [...state]
+  const newCollections = [...collections]
   newCollections[collectionIdx] = {
-    ...state[collectionIdx],
+    ...collections[collectionIdx],
     id: createSlug(newCollectionName),
     name: newCollectionName,
   }
-  return newCollections
+  return {
+    ...state,
+    animeCollections: newCollections,
+  }
 }
 
 const animeCollectionRemoveCollectionResolver: Resolver<
   AnimeCollectionState,
   AnimeCollectionRemoveCollectionAction
 > = (state, { collectionName }) => {
-  return [...state.filter(collection => collection.name !== collectionName)]
+  const { animeCollections: collections } = state
+  return {
+    ...state,
+    animeCollections: [
+      ...collections.filter(collection => collection.name !== collectionName),
+    ],
+  }
 }
 
 const animeCollectionLoadCollectionsResolver: Resolver<
   AnimeCollectionState,
   AnimeCollectionLoadCollectionsAction
 > = () => {
-  return loadAnimeCollections()
+  const animeCollections = loadAnimeCollections()
+  return {
+    isLoading: false,
+    animeCollections,
+  }
 }
 
-const loadAnimeCollections = (): AnimeCollectionState => {
+const loadAnimeCollections = (): AnimeCollection[] => {
   const data = localStorage.getItem(ANIME_COLLECTIONS_KEY)
   if (!data) return []
   return JSON.parse(data) // TODO check wether JSON is proper type
 }
 
-const saveAnimeCollections = (state: AnimeCollectionState) => {
-  localStorage.setItem(ANIME_COLLECTIONS_KEY, JSON.stringify(state))
+const saveAnimeCollections = (collections: AnimeCollection[]) => {
+  localStorage.setItem(ANIME_COLLECTIONS_KEY, JSON.stringify(collections))
 }
 
 // MAIN RESOLVER
@@ -127,7 +156,7 @@ const resolver = (
 
   if (action.type !== AnimeCollectionActionEnum.LOAD_COLLECTIONS) {
     // Save Collection after Action, except for load collections
-    saveAnimeCollections(newState)
+    saveAnimeCollections(newState.animeCollections)
   }
   return newState
 }
