@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4'
+import { v4 as uuid } from 'uuid'
 import { Resolver } from '../../types/provider'
 import { AnimeCollection } from '../../entities/animeCollection'
 import { AnimeCollectionState } from './state'
