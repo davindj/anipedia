@@ -37,7 +37,7 @@ const CollectionListPage = () => {
   return (
     <MainLayout>
       <CollectionListPageWrapper>
-        <TitlePage>Anime Collections</TitlePage>
+        <TitlePage>My Collections</TitlePage>
         <Button
           text={'Add a Collection'}
           size={ButtonSizeEnum.NORMAL}
