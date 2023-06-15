@@ -35,7 +35,7 @@ export const CollectionItem = ({
   onEdit = () => {},
   onRemove = () => {},
 }: CollectionItemProps) => {
-  const target = getRouteWithParam(ROUTE_PATH.ANIME_DETAIL_PAGE, id)
+  const target = getRouteWithParam(ROUTE_PATH.COLLECTION_DETAIL_PAGE, id)
   const coverImage =
     animes.length > 0 ? animes[0].cover : '/img/collection-no-image.png'
   const title = name
