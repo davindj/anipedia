@@ -1,46 +1,97 @@
-# Getting Started with Create React App
+![](./public/img/anipedia-logo-text.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Anipedia
 
-## Available Scripts
+Anipedia is an Anime Encylopedia web application that utilize [Anilist API](https://anilist.gitbook.io/anilist-apiv2-docs/). in this application user can browse animes, learn deeper about anime, and save anime to collections.
 
-In the project directory, you can run:
+## 👁️ Project Preview
 
-### `npm start`
+![](./readme-assets/preview-app.png)
+This project is also hosted and can be viewed in this link:  
+https://anipedia-vynncode.netlify.app/
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🧬 Tech Stack
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+here are some technologies I use to make this project
 
-### `npm test`
+- [React](https://react.dev/). frontend framework.
+- [Apollo](https://www.apollographql.com/). fetch QraphQL API
+- [Emotion](https://emotion.sh/docs/introduction). CSS in JS library
+- [Jest](https://jestjs.io/). unit testing framework
+- [Testing Library](https://testing-library.com/). UI Testing library
+- [Storybook](https://storybook.js.org/). frontend workshop for building UI components in isolation.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ⚙️ Installation
 
-### `npm run build`
+Follow these steps if you want to run this project on your local machine.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. download / clone this repo.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```sh
+$ git clone github.com/davindj/anipedia
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. go to project directory and install package using your favorite javascript package manager.
 
-### `npm run eject`
+```sh
+# my favorite
+$ yarn
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. run the project to make sure installation working properly
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```sh
+$ yarn start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 📕 Storybook
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Storybook is utility tools to develop UI component in Isolated way, so that developer can focus on breakdowning component and make sure is working properly.  
+![](./readme-assets/preview-storybook-documentation.gif)  
+To use storybook in this project you can simply run this command. (assuming your installation is working fine)
 
-## Learn More
+```sh
+$ yarn storybook
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🧪 Testing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Storybook can also be used for UI testing also called interaction testing. Storybook itself make use of Jest and Testing Library to make this happen.
+
+In this tools you can visualize your UI testing script and also debug step by step, make it easier and faster to recognize problem.  
+![](./readme-assets/preview-storybook-testing.gif)
+
+Not only does UI testing run in UI. Storybook testing can also be run in cli using this command.
+
+> _make sure your storybook is running before run this command_
+
+```sh
+yarn test-storybook
+```
+
+If you want to get code coverage you run this command.
+
+```sh
+yarn test-storybook:coverage
+```
+
+coverage will be output'd at `/coverage/storybook` and for html version you can look up in `/coverage/storybook/lcov-report/index.html`.
+
+Currently here is the code coverage result:
+![](./readme-assets/coverage-result-20230616.png)
+<sup>coverage at 14:35 16 June 2023</sup>  
+The result is <strong>63.94%</strong> for all statements. This happen because pages component in this project are not tested yet.
+
+## 🏭 Production
+
+To build this app for production you can simply run this command
+
+```sh
+$ yarn build
+```
+
+and run it using server utility programs like [serve](https://yarnpkg.com/package/serve)
+
+```sh
+$ serve -s build
+```
