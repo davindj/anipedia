@@ -56,7 +56,7 @@ export const CollectionNameModal = ({
   onCancel: onCancelCallback = () => {},
 }: CollectionNameModalProps) => {
   const [name, setName] = useState('')
-  const refIsInputted = useRef(false)
+  const [isUserEverInput, setIsUserEverInput] = useState(false)
   useEffect(() => {
     setName(initialCollectionName)
   }, [initialCollectionName])
@@ -66,7 +66,7 @@ export const CollectionNameModal = ({
   // Variable
   const finalValue = name.trim()
 
-  const isEmpty = refIsInputted.current && finalValue === ''
+  const isEmpty = isUserEverInput && finalValue === ''
   const isAlphanumeric = /^[a-zA-Z0-9\s]*$/.test(finalValue)
   const isNameAlreadyUsed = usedNames.some(
     usedName => usedName.toLowerCase() === finalValue.toLowerCase()
@@ -84,7 +84,7 @@ export const CollectionNameModal = ({
   // Helper Function
   const resetForm = () => {
     setName('')
-    refIsInputted.current = false
+    setIsUserEverInput(false)
   }
 
   // Handler
@@ -93,10 +93,14 @@ export const CollectionNameModal = ({
   > = e => {
     const newValue = e.target.value
     setName(newValue)
-    refIsInputted.current = true
+    setIsUserEverInput(true)
   }
   const onSubmit = () => {
     if (isError) return
+    if (finalValue === '') {
+      setIsUserEverInput(true)
+      return
+    }
     onCreate(finalValue)
     resetForm()
   }

@@ -158,3 +158,23 @@ export const Cancel: Story = {
     expect(spy).toHaveBeenCalled()
   },
 }
+
+export const CantSubmitDirectly: Story = {
+  args: {
+    isOpen: true,
+    title: 'Add New Collection',
+    usedNames: ['my collection'],
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement.ownerDocument.body)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const spy = jest.spyOn(args as any, 'onCreate')
+
+    const submit = await canvas.getByRole('button', {
+      name: /save collection/i,
+    })
+    await userEvent.click(submit)
+
+    expect(spy).not.toHaveBeenCalled()
+  },
+}
