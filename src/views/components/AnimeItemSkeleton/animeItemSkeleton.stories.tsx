@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { AnimeItemSkeleton } from '.'
 
 const meta = {
-  title: 'Components/AnimeItemSkeleton',
+  title: 'Components/ListItem/AnimeItemSkeleton',
   component: AnimeItemSkeleton,
   decorators: [
     story => (

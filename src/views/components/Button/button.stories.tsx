@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
+import { expect } from '@storybook/jest'
 import { Button, ButtonColorEnum, ButtonSizeEnum, ButtonTypeEnum } from '.'
+import { within } from '@storybook/testing-library'
+import userEvent from '@testing-library/user-event'
 
 const meta = {
-  title: 'Components/Button',
+  title: 'Components/Basic/Button',
   component: Button,
   tags: ['autodocs'],
   argTypes: {
@@ -29,6 +31,15 @@ export const NormalSize: Story = {
   args: {
     text: 'Button',
     size: ButtonSizeEnum.NORMAL,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = await within(canvasElement)
+
+    const inputElement = await canvas.getByRole('button', {
+      name: /Button/i,
+    })
+    expect(inputElement.innerText).toBe('Button')
+    userEvent.click(inputElement)
   },
 }
 

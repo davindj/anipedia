@@ -4,7 +4,7 @@ import { jest, expect } from '@storybook/jest'
 import { CollectionNameModal } from '.'
 
 const meta = {
-  title: 'Components/Modals/CollectionNameModal',
+  title: 'Components/Modal/CollectionNameModal',
   component: CollectionNameModal,
   decorators: [
     story => (
@@ -17,7 +17,6 @@ const meta = {
       </>
     ),
   ],
-  tags: ['autodocs'],
   argTypes: {},
 } satisfies Meta<typeof CollectionNameModal>
 

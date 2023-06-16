@@ -1,9 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { AddAnimesToCollectionModal } from '.'
+import { userEvent, within } from '@storybook/testing-library'
+import { expect, jest } from '@storybook/jest'
+import { mockAnimeCollections } from './mock'
 
 const meta = {
-  title: 'Components/Modals/AddAnimesToCollectionModal',
+  title: 'Components/Modal/AddAnimesToCollectionModal',
   component: AddAnimesToCollectionModal,
   decorators: [
     story => (
@@ -16,7 +19,6 @@ const meta = {
       </>
     ),
   ],
-  tags: ['autodocs'],
   argTypes: {},
 } satisfies Meta<typeof AddAnimesToCollectionModal>
 
@@ -32,40 +34,86 @@ export const Normal: Story = {
 
 export const Filled: Story = {
   args: {
-    isOpen: false,
-    collections: [
-      {
-        id: '1',
-        name: 'collection 1',
-        animes: [
-          {
-            id: 1,
-            title: 'one piece',
-            cover: '/anime-cover/anime-cover-1.jpeg',
-          },
-        ],
-      },
-      {
-        id: '2',
-        name: 'collection 2',
-        animes: [
-          {
-            id: 2,
-            title: 'one piece',
-            cover: '/anime-cover/anime-cover-2.jpeg',
-          },
-          {
-            id: 3,
-            title: 'one piece',
-            cover: '/anime-cover/anime-cover-3.jpeg',
-          },
-        ],
-      },
-      {
-        id: '3',
-        name: 'collection 3',
-        animes: [],
-      },
-    ],
+    isOpen: true,
+    collections: mockAnimeCollections,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement.ownerDocument.body)
+
+    const collections = await canvas.getAllByRole('button', {
+      name: /collection-anime/i,
+      exact: false,
+    })
+    const addButton = await canvas.getByRole('button', {
+      name: /add new collection/i,
+    })
+    const cancelButton = await canvas.getByRole('button', { name: /cancel/i })
+
+    await expect(collections.length).toBe(3)
+    await expect(addButton).toBeInTheDocument()
+    await expect(cancelButton).toBeInTheDocument()
+  },
+}
+
+export const CollectionItemClicked: Story = {
+  args: {
+    isOpen: true,
+    collections: mockAnimeCollections,
+    onClickCollection: jest.fn(),
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement.ownerDocument.body)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const spy = jest.spyOn(args as any, 'onClickCollection')
+
+    const collections = await canvas.getAllByRole('button', {
+      name: /collection-anime/i,
+      exact: false,
+    })
+    const firstCollection = collections[0]
+    await userEvent.click(firstCollection)
+
+    await expect(spy).toHaveBeenCalled()
+    await spy.mockRestore()
+  },
+}
+
+export const AddNewCollectionClicked: Story = {
+  args: {
+    isOpen: true,
+    collections: mockAnimeCollections,
+    onAddNewCollection: jest.fn(),
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement.ownerDocument.body)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const spy = jest.spyOn(args as any, 'onAddNewCollection')
+
+    const addButton = await canvas.getByRole('button', {
+      name: /add new collection/i,
+    })
+    await userEvent.click(addButton)
+
+    await expect(spy).toHaveBeenCalled()
+    await spy.mockRestore()
+  },
+}
+
+export const CancelClicked: Story = {
+  args: {
+    isOpen: true,
+    collections: mockAnimeCollections,
+    onCancel: jest.fn(),
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement.ownerDocument.body)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const spy = jest.spyOn(args as any, 'onCancel')
+
+    const cancelButton = await canvas.getByRole('button', { name: /cancel/i })
+    await userEvent.click(cancelButton)
+
+    await expect(spy).toHaveBeenCalled()
+    await spy.mockRestore()
   },
 }

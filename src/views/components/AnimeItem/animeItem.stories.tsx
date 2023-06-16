@@ -2,13 +2,19 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { mockAnimeDefault, mockAnimeWithNoCover } from './mock'
 import { AnimeItem } from '.'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
 const meta = {
-  title: 'Components/AnimeItem',
+  title: 'Components/ListItem/AnimeItem',
   component: AnimeItem,
   decorators: [
     story => (
-      <div style={{ maxWidth: '300px', overflow: 'hidden' }}>{story()}</div>
+      <MemoryRouter initialEntries={['/']}>
+        <div style={{ maxWidth: '300px', overflow: 'hidden' }}>{story()}</div>
+        <Routes>
+          <Route path="*" />
+        </Routes>
+      </MemoryRouter>
     ),
   ],
   tags: ['autodocs'],
