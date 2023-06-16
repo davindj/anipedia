@@ -1,5 +1,4 @@
 ![](./public/img/anipedia-logo-text.png)     
-[![Netlify Status](https://api.netlify.com/api/v1/badges/a6544321-8a3f-4bc7-baa1-8453ae639b4d/deploy-status)](https://app.netlify.com/sites/anipedia-vynncode/deploys)
 
 # Anipedia 
 
